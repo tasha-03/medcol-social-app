@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Удалить запись</h1>
+<form method="post" class="one-record-form">
+    <p>Вы уверены, что хотите удалить запись?</p>
+    <input id="delete" type="submit" value="Удалить"><br/>
+</form>
+
+{% endblock %}

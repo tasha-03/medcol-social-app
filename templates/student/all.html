@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="/students" method="get">
+    <div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    {% if current_user.role_id == 1 %}
+    <ul>
+        <li><p><a href="/students/new">Добавить запись</a></p></li>
+        <li><p><a href="/students/deleted">Удаленные записи</a></p></li>
+        <li><p><a href="/import/excel">Импорт из Excel</a></p></li>
+    </ul>
+    {% endif %}
+        <input hidden="hidden" type="submit" value="Поиск">
+        <input type="submit" value="Выгрузить данные в Excel" formaction="/students/excel">
+    </div>
+    <div id="student-table-wrapper">
+
+        {% include 'student/components/searchbar.html' %}
+
+        {% include 'student/components/student-table-wrapper.html' %}
+
+    </div>
+</form>
+{% endblock %}

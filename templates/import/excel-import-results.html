@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Confirm upload</h1>
+<button onclick="window.history.back();">Назад</button>
+<form action="/import/excel/confirm" method="post">
+    <input type="submit" value="Загрузить">
+    <table id="import-preview-table">
+        <thead>
+        <tr>
+            <th style="width:5%">
+                <input type="checkbox" id="check-all-records" checked>
+            </th>
+            {% for i in range(result.columns|length) %}
+            <th class="import-header-select">
+                <div>
+                    <div>
+                        <p>{{result.columns[i]}} →</p>
+                    </div>
+                    <select name="{{i}}-select" id="{{i}}-select">
+                        <option value="">--Опустить--</option>
+                        {% for k,v in SUPPORTED_IMPORT_FIELDS.items() %}
+                            <option value="{{k}}">{{v}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+            {% for row in result.itertuples() %}
+                <tr role="row" tabindex="0" aria-labelledby="row{{row[0]}}">
+                    <td style="width:5%;text-align:center">
+                        <input type="checkbox" name="selected_records" value="{{row.Index}}" class="record-checkbox" aria-labelledby="row{{row[0]}}" checked>
+                    </td>
+                    {% for v in row[1:] %}
+                    <td>{{v}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let selectAllCheckbox = document.querySelector('#check-all-records');
+        let checkboxes = document.querySelectorAll('.record-checkbox');
+
+        document.querySelectorAll('tr[role="row"]').forEach(row => {
+            row.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+                setIndeteminateMasterCheckbox()
+            });
+        });
+
+        function toggleCheckboxes(source) {
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = source.checked;
+            });
+        }
+
+        function setIndeteminateMasterCheckbox() {
+            if (!selectAllCheckbox.indeterminate) {
+                selectAllCheckbox.indeterminate = true
+                return
+            }
+            let record_count = document.querySelectorAll('.record-checkbox').length;
+            let checked_count = document.querySelectorAll('.record-checkbox:checked').length;
+            if (checked_count == record_count) {
+                selectAllCheckbox.indeterminate = false
+                selectAllCheckbox.checked = true
+            } else if (checked_count == 0) {
+                selectAllCheckbox.indeterminate = false
+                selectAllCheckbox.checked = false
+            }
+        };
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener("click", function () {
+                setIndeteminateMasterCheckbox()
+            })
+        });
+
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('click', function () {
+                toggleCheckboxes(this);
+            });
+        }
+    });
+</script>
+{% endblock %}

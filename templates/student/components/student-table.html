@@ -1,0 +1,52 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <label for="filter_letter">ФИО</label>
+                <select id="filter_letter" name="filter_letter" onchange="this.form.submit()">
+                    <option value="">Все</option>
+                    {% for letter in FIO_FILTERING %}
+                        {% if filter_options['filter_letter'] == letter %}
+                            <option value="{{letter}}" selected>{{letter}}</option>
+                        {% else %}
+                            <option value="{{letter}}">{{letter}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </th>
+            <th>
+                <label for="filter_group">Группа</label>
+                <select id="filter_group" name="filter_group" onchange="this.form.submit()">
+                    <option value="">Все</option>
+                    {% for name, list in GROUPS_FILTERING.items() %}
+                        <optgroup label="{{name}}">
+                            {% for group in list %}
+                                {% if group[0] == filter_options['filter_group'] %}
+                                    <option value="{{group[0]}}" selected>{{group[1]}}</option>
+                                {% else %}
+                                    <option value="{{group[0]}}">{{group[1]}}</option>
+                                {% endif %}
+                            {% endfor%}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+            </th>
+            <th>Дата рождения</th>
+            <th>Добавлено прользователем</th>
+            <th>Изменено пользователем</th>
+            <th>Изменено</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for student in data %}
+        <tr onclick="location.href='/students/{{student[0]}}'">
+            <td>{{student[1]}}</td>
+            <td>{{student[2]}}</td>
+            <td>{{student[3]}}</td>
+            <td>{{student[4]}}</td>
+            <td>{{student[5]}}</td>
+            <td>{{student[6]}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Добавить запись</h1>
+<form method="post" class="one-record-form">
+    <div>
+        <label for="fio">Имя студента:</label>
+        <input id="fio" type="text" name="fio" required><br/>
+    </div>
+    <div>
+        <label for="birthdate">Дата рождения:</label>
+        <input id="birthdate" type="date" name="birthdate" required><br/>
+    </div>
+    <div>
+        <label for="group">Группа:</label>
+        <select name="group" id="group" required>
+            <option value="">--Выберите группу--</option>
+            {% for name, list in GROUPS_FILTERING.items() %}
+                <optgroup label="{{name}}">
+                    {% for group in list %}
+                        <option value="{{group[0]}}">{{group[1]}}</option>
+                    {% endfor%}
+                </optgroup>
+            {% endfor %}
+        </select><br/>
+    </div>
+    <input type="submit" value="Добавить"><br/>
+</form>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Информация о студенте</h1>
+<form class="one-record-form">
+    <fieldset>
+        <legend>Основная информация</legend>
+        <label for="fio">Имя студента:</label>
+        <input disabled id="fio" type="text" name="fio" value="{{data['fio']}}"><br/>
+
+        <label for="birthdate">Дата рождения:</label>
+        <input disabled id="birthdate" type="date" name="birthdate" value="{{data['birthdate']}}"><br/>
+
+        <label for="groupId">Группа:</label>
+        <select disabled name="groupId" id="groupId" required>
+            <option value="">--Выберите группу--</option>
+            {% for name, list in GROUPS_FILTERING.items() %}
+                <optgroup label="{{name}}">
+                    {% for group in list %}
+                        {% if group[0] == data['groupId'] %}
+                        <option value="{{group[0]}}" selected>{{group[1]}}</option>
+                        {% else %}
+                        <option value="{{group[0]}}">{{group[1]}}</option>
+                        {% endif %}
+                    {% endfor%}
+                </optgroup>
+            {% endfor %}
+        </select><br/>
+    </fieldset>
+
+    {% for legend, fieldset in STUDENT_STRUCTURE["fields"].items() %}
+    <fieldset>
+        <legend>{{legend}}</legend>
+        {% for field, options in fieldset.items() %}
+        <label for="{{field}}">{{options["label"]}}</label>
+
+        {% if options.get("allowed values") %}
+        {% if options.get("type") == "check" %}
+        <select disabled name="{{field}}" id="{{field}}">
+        {% if data[field] == 1 %}
+        <option value="0">Нет</option>
+        <option value="1" selected>Да</option>
+        {% else %}
+        <option value="0" selected>Нет</option>
+        <option value="1">Да</option>
+        {% endif %}
+        </select>
+        {% else %}
+        <select disabled name="{{field}}" id="{{field}}">
+            {% if "NULLABLE" in options["modifiers"] %}
+            <option value="">{{options["nullValueLabel"]}}</option>
+            {% endif %}
+            {% for allowed_value in options["allowed values"] %}
+
+            {% if data[field] == allowed_value %}
+            <option value="{{allowed_value}}" selected>{{allowed_value}}</option>
+            {% else %}
+            <option value="{{allowed_value}}">{{allowed_value}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        {% endif %}
+        {% else %}
+        {% if options.get("type") == "int" %}
+        <input disabled type="number" name="{{field}}" id="{{field}}" value="{{data[field]}}">
+        {% else %}
+        <input disabled type="text" name="{{field}}" id="{{field}}" value="{{data[field]}}">
+        {% endif %}
+        {% endif %}
+        <br/>
+
+        {% endfor %}
+    </fieldset>
+    {% endfor %}
+</form>
+
+{% endblock %}

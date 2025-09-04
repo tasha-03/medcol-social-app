@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+        <li><p><a href="/students">← Назад</a></p></li>
+    </ul>
+</div>
+<form action="/students/deleted" method="get">
+    <div id="student-table-wrapper">
+
+        {% include 'student/components/searchbar.html' %}
+
+        {% include 'student/components/student-table-wrapper.html' %}
+
+    </div>
+</form>
+{% endblock %}

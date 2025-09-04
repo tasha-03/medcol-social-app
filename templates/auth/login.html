@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div>
+    <form id="login_form" method="post" class="one-record-form">
+        <label for="login">Логин:</label>
+        <input id="login" type="text" name="login"><br/>
+        <label for="password">Пароль:</label>
+        <input id="password" type="password" name="password"><br/>
+        {% if error %}
+        <p style="color:#e51c23">{{error}}</p>
+        {% endif %}
+        <input type="submit" value="Войти"><br/>
+    </form>
+</div>
+
+{% endblock %}

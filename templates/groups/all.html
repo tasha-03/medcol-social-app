@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="/groups" method="get">
+    <div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+        <li><p><a href="/groups/new">Добавить запись</a></p></li>
+<!--        <li><p><a href="/import/excel">Импорт из Excel</a></p></li>-->
+    </ul>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Код</th>
+                <th>Наименование</th>
+                <th>Руководитель</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in data %}
+            <tr onclick="location.href='/groups/{{group[0]}}'">
+                <td>{{group[1]}}</td>
+                <td>{{group[2]}}</td>
+                <td>{{group[3]}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
+{% endblock %}

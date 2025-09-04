@@ -1,0 +1,72 @@
+<div id="searchbar">
+    <p>Параметры фильтрации</p>
+    <input type="submit" value="Поиск">
+    <p><a href="/students">Сбросить поиск</a></p>
+    <fieldset>
+        <legend>Возраст (включительно)</legend>
+        <div class="form-group">
+            <label for="age_b">От:</label>
+            <input id="age_b" name="age_b" type="number" min="0" max="100" value="{{age_b}}">
+        </div>
+        <div class="form-group">
+            <label for="age_t">До:</label>
+            <input id="age_t" name="age_t" type="number" min="0" max="100" value="{{age_t}}">
+        </div>
+    </fieldset>
+    {% for legend, fieldset in STUDENT_STRUCTURE["fields"].items() %}
+        {% if STUDENT_FIELDSETS_FILTER.get(legend) == "FILTER" %}
+        <fieldset>
+            <legend>{{legend}}</legend>
+            {% for field, options in fieldset.items() %}
+                {% if "FILTER" in options['modifiers'] %}
+                <div class="form-group">
+                <label for="{{field}}">{{options["labelShort"]}}</label>
+
+                    {% if options.get("allowed values") %}
+                        {% if options.get("type") == "check" %}
+                        <select name="{{field}}" id="{{field}}">
+                            <option value="all">Все</option>
+
+                            {% if filter_fields[field] == "0" %}
+                            <option value="0" selected>Нет</option>
+                            <option value="1">Да</option>
+                            {% elif filter_fields[field] == "1" %}
+                            <option value="0">Нет</option>
+                            <option value="1" selected>Да</option>
+                            {% else %}
+                            <option value="0">Нет</option>
+                            <option value="1">Да</option>
+                            {% endif %}
+
+                        </select>
+                        {% else %}
+                        <select name="{{field}}" id="{{field}}">
+                            <option value="all">Все</option>
+
+                            {% if "NULLABLE" in options["modifiers"] %}
+                                {% if filter_fields[field] == "" %}
+                                <option value="" selected>{{options["nullValueLabel"]}}</option>
+                                {% else %}
+                                <option value="">{{options["nullValueLabel"]}}</option>
+                                {% endif %}
+                            {% endif %}
+
+                            {% for allowed_value in options["allowed values"] %}
+                                {% if allowed_value == filter_fields[field] %}
+                                <option value="{{allowed_value}}" selected>{{allowed_value}}</option>
+                                {% else %}
+                                <option value="{{allowed_value}}">{{allowed_value}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </fieldset>
+        {% endif %}
+    {% endfor %}
+    <input type="submit" value="Поиск">
+    <p><a href="/students">Сбросить поиск</a></p>
+</div>

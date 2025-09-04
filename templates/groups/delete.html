@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Delete a record</h1>
+<form method="post">
+    <label for="delete">Вы уверены, что хотите удалить запись?</label>
+    <input id="delete" type="submit" value="Удалить"><br/>
+</form>
+
+{% endblock %}

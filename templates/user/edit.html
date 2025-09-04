@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Изменить запись</h1>
+<form method="post" class="one-record-form">
+    <label for="name">Имя пользователя:</label>
+    <input id="name" type="text" name="name" value="{{data[2]}}"><br/>
+    <label for="login">Логин:</label>
+    <input id="login" type="text" name="login" value="{{data[1]}}"><br/>
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" name="password"><br/>
+    <label for="role">Роль:</label>
+    <select id="role" name="role">
+        {% if data[3] == 2 %}
+        <option value="2" selected>Преподаватель</option>
+        <option value="1">Администратор</option>
+        <option value="3">Социальный педагог</option>
+        {% elif data[3] == 1 %}
+        <option value="2">Преподаватель</option>
+        <option value="1" selected>Администратор</option>
+        <option value="3">Социальный педагог</option>
+        {% elif data[3] == 3 %}
+        <option value="2">Преподаватель</option>
+        <option value="1">Администратор</option>
+        <option value="3" selected>Социальный педагог</option>
+        {% endif %}
+    </select><br/>
+    <input type="submit" value="Сохранить" onsubmit="console.log(document.getElementById('role').value)"><br/>
+</form>
+
+{% endblock %}

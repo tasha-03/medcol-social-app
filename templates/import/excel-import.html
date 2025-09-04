@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Upload .xls/.xlsx file</h1>
+<form method="post" enctype="multipart/form-data">
+    <input id="file" type="file" name="file" accept=".xls,.xlsx,.csv" >
+    <input type="submit" value="Загрузить"><br/>
+</form>
+{% endblock %}

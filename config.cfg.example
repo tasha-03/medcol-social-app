@@ -1,0 +1,3 @@
+SECRET_KEY="example_secret_key"
+SQLITE_DB_PATH="../social-info.db"
+BACKUP_SCHEDULE_TIME="00:00"

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+<!--        <li><p><a href="/students">← Назад</a></p></li>-->
+        <li><p><a href="#" onclick="window.history.back()">← Назад</a></p></li>
+    </ul>
+</div>
+<h1>Update a record</h1>
+<form method="post" class="one-record-form">
+    <label for="code">Код группы:</label>
+    <input id="code" type="text" name="code" value="{{data[1]}}"><br/>
+    <label for="name">Наименование специальности:</label>
+    <input id="name" type="text" name="groupname" value="{{data[2]}}" list="groups_names_list"><br/>
+    <datalist id="groups_names_list">
+        {% for name in groups_names_list%}
+        <option value="{{name}}">
+        {% endfor %}
+    </datalist>
+    <label for="curatorId">Куратор:</label>
+    <select name="curatorId" id="curatorId">
+        {% for id, name in users_dict.items() %}
+        {% if data[4] == id %}
+        <option value="{{id}}" selected>{{name}}</option>
+        {% else %}
+        <option value="{{id}}">{{name}}</option>
+        {% endif %}
+        {% endfor %}
+    </select><br/>
+    <input type="submit" value="Сохранить"><br/>
+</form>
+<!--<form method="get" action="./{{data[0]}}/delete">-->
+<!--    <input type="submit" value="Удалить">-->
+<!--</form>-->
+
+{% endblock %}

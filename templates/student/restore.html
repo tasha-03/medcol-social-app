@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Восстановить запись</h1>
+<button onclick="window.history.back();">Назад</button>
+<form method="post" class="one-record-form">
+    <p>Вы уверены, что хотите восстановить запись?</p>
+    <input id="restore" type="submit" value="Восстановить"><br/>
+</form>
+
+{% endblock %}

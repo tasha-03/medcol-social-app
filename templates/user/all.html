@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="list-nav" style="position:sticky;top:50px;background-color:#fff;z-index:1000">
+    <ul>
+        <li><p><a href="/users/new">Добавить запись</a></p></li>
+    </ul>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>login</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in data %}
+        <tr onclick="location.href='/users/{{user[0]}}'">
+            <td>{{user[1]}}</td>
+            <td>{{user[2]}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

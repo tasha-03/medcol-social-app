@@ -1,0 +1,64 @@
+<div id="student_table">
+    <div class="record-count-wrapper">
+        <p style="margin-left:1rem"><b>Найдено записей: {{record_count}} ({{limit * (page - 1) + 1}} – {{[limit * page, record_count] | min}})</b></p>
+        {% if record_count//limit + 1 > 1 %}
+        <div class="page-buttons-wrapper">
+            {% for i in range(1,record_count//limit+2) %}
+                {% if page == i %}
+                <button name="page" type="submit" value="{{i}}" disabled>{{i}}</button>
+                {% else %}
+                <button name="page" type="submit" value="{{i}}">{{i}}</button>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="page-buttons-wrapper">
+            <label for="limit1">Выведено:</label>
+            <input
+                    style="width:3em;margin-inline:0.5em"
+                    type="number" name="limit" id="limit1"
+                    value="{{limit}}"
+                    oninput="set2()"
+            />
+            <label for="limit1">записей</label>
+        </div>
+    </div>
+
+    {% include 'student/components/student-table.html' %}
+
+    <div class="record-count-wrapper">
+        <p style="margin-left:1rem"><b>Найдено записей: {{record_count}} ({{limit * (page - 1) + 1}} – {{[limit * page, record_count] | min}})</b></p>
+        {% if record_count//limit + 1 > 1 %}
+        <div class="page-buttons-wrapper">
+            {% for i in range(1,record_count//limit+2) %}
+                {% if page == i %}
+                <button name="page" type="submit" value="{{i}}" disabled>{{i}}</button>
+                {% else %}
+                <button name="page" type="submit" value="{{i}}">{{i}}</button>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="page-buttons-wrapper">
+            <label for="limit2">Выведено:</label>
+            <input
+                    style="width:3em;margin-inline:0.5em"
+                    type="number" name="limit" id="limit2"
+                    value="{{limit}}"
+                    oninput="set1()"
+            />
+            <label for="limit2">записей</label>
+        </div>
+    </div>
+</div>
+<script>
+    let limIn1 = document.getElementById("limit1");
+    let limIn2 = document.getElementById("limit2");
+
+    function set2() {
+        limIn2.value=limIn1.value;
+    }
+    function set1() {
+        limIn1.value=limIn2.value;
+    }
+</script>

@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+}
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+#content-wrap {
+    padding-bottom: 5rem;
+}
+div[id$="nav"] {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+div[id$="nav"] > ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div[id$="nav"] > ul > li > p > a {
+    padding: 12px 16px;
+}
+div[id$="nav"] > ul > li > p > a:hover {
+    background-color: #e9e9e9;
+}
+#user_name_tag > p{
+    padding: 0 16px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+tbody > tr:hover {
+    cursor: pointer;
+    filter: brightness(1.25);
+}
+tbody > tr:nth-child(odd) {
+    background-color: #d3d3d3;
+}
+tbody > tr:nth-child(even) {
+    background-color: #e9e9e9;
+}
+td {
+    padding: 8px 24px;
+}
+td:first-child, th:first-child {
+    width: 30%;
+}
+input[type="submit"] {
+    cursor: pointer;
+}
+.one-record-form {
+    width: 100%;
+}
+.one-record-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.one-record-form label:has(+ input[type="checkbox"]) {
+    display: inline;
+}
+.one-record-form input:not([type="checkbox"]), .one-record-form select, input[type="submit"] {
+    width: 25%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+.one-record-form input[type="submit"] {
+    margin-top: 2rem;
+}
+.one-record-form *:disabled {
+    color: #000;
+}
+input[type="submit"][value="Удалить"] {
+    background-color: #e51c23;
+    color: #ffffff;
+    margin-top: 0;
+}
+input[type="submit"][value="Удалить"]:hover {
+    background-color: #f19392;
+    color: #ffffff;
+}
+
+.form-group{
+    position:relative;
+}
+#student-table-wrapper {
+    display: flex;
+}
+#searchbar {
+    padding-bottom: 2rem;
+    position:static;
+    width:20%;
+    margin: 0 1rem;
+}
+#searchbar label {
+    font-size: small;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #666;
+}
+#searchbar input:not([type="submit"]), #searchbar select {
+    box-sizing: border-box;
+    padding: 20px 5px 5px 5px;
+    width: 100%;
+}
+#searchbar input[type="submit"] {
+    width: 100%;
+    margin: 0;
+}
+#searchbar a {
+    padding: 12px 16px;
+}
+#searchbar a:hover {
+    background-color: #e9e9e9;
+}
+#searchbar select:has(option[value="all"]:not(:checked))  {
+    background-color: #e9e9e9;
+}
+#searchbar option {
+    background-color: #ffffff;
+}
+#student_table {
+    flex-grow: 1;
+}
+#btnTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+  
+#btnTop:hover {
+    background-color: #d3d3d3; /* Add a dark-grey background on hover */
+}
+.record-count-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.record-count-wrapper > * {
+    flex-grow: 1;
+}
+.page-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-buttons-wrapper > button:not(:disabled) {
+    cursor: pointer;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    border-top: 1px solid #8a8a8a;
+}
+footer > p {
+    margin: 2rem;
+    vertical-align: middle;
+    text-align: center;
+}
+#login_form {
+    width: 25%;
+    /* height: calc(100vh - 50px - 16px * 2); */
+    padding: 0 calc((100% - 25%)/2);
+}
+#login_form > * {
+    width: 100%;
+}
+.import-header-select > div{
+    display: flex;
+    flex-direction: column;
+}
+.import-header-select p {
+    white-space: nowrap;
+}
+#import-preview-table tr:has(input[type=checkbox]:not(:checked)) {
+    color: #8a8a8a;
+}
