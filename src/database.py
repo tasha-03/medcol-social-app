@@ -78,8 +78,9 @@ def fetch_users_list():
 
 def create_backup():
     backups_dir = "./backups"
+    if not os.path.exists(backups_dir):
+        os.makedirs(backups_dir)
     backup_files = [file for file in sorted(os.listdir(backups_dir)) if file.endswith(".sql")]
-    print(backups_dir, backup_files)
     if len(backup_files) > 1:
         os.remove(f"{backups_dir}/{backup_files[0]}")
 
