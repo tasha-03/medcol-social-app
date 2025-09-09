@@ -24,6 +24,16 @@ def group_get_by_id(id):
         data = cursor.fetchone()
         return data
 
+def group_get_by_code(code: str):
+    with sqlite3.connect(SQLITE_DB_PATH) as groups:
+        cursor = groups.cursor()
+        cursor.execute(
+            "SELECT * from DefaultGroupsView WHERE code=?",
+            (code,)
+        )
+        data = cursor.fetchone()
+        return data
+
 def group_new(code, name, curatorId):
     with sqlite3.connect(SQLITE_DB_PATH) as groups:
         cursor = groups.cursor()

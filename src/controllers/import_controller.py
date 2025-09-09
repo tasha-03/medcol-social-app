@@ -1,3 +1,4 @@
+import sqlite3
 from datetime import timedelta
 
 from pandas import DataFrame
@@ -65,7 +66,10 @@ def import_excel_data(
     print(groups_list)
 
     for group in groups_list:
-        ind = groups_controller.group_new(code=group, name="", curatorId=current_user.id)
+        try:
+            ind = groups_controller.group_new(code=group, name="", curatorId=current_user.id)
+        except sqlite3.IntegrityError:
+            ind = groups_controller.group_get_by_code(group)[0]
         final_df.loc[final_df["groupId"] == group, "groupId"] = ind
 
     print(final_df)

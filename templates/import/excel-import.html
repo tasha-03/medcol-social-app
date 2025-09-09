@@ -1,9 +1,57 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h1>Upload .xls/.xlsx file</h1>
+<h1>Загрузить .xls/.xlsx/.csv файл</h1>
 <form method="post" enctype="multipart/form-data">
     <input id="file" type="file" name="file" accept=".xls,.xlsx,.csv" >
     <input type="submit" value="Загрузить"><br/>
 </form>
+<h2>Перед загрузкой</h2>
+<ul>
+    <li><p>Убедитесь, в таблице присутствуют заголовки столбцов и записи начинаются со 2-ой строки</p></li>
+    <li><p>Убедитесь, что файл представлен в формате:</p></li>
+</ul>
+<table class="unformatted">
+    <tr>
+        <td colspan="3">В любом порядке</td>
+    </tr>
+    <tr>
+        <td>ФИО студента</td>
+        <td>Код группы (в формате: Лд-17г/д)</td>
+        <td>Дата рождения (формат данных - дата)</td>
+    </tr>
+</table>
+<p>Или:</p>
+<table class="unformatted">
+    <tr>
+        <td colspan="5">В любом порядке</td>
+    </tr>
+    <tr>
+        <td colspan="3">В данном порядке</td>
+        <td colspan="2"> </td>
+    </tr>
+    <tr>
+        <td>Фамилия студента</td>
+        <td>Имя студента</td>
+        <td>Отчество студента</td>
+        <td>Код группы (в формате: Лд-17г/д)</td>
+        <td>Дата рождения (формат данных - дата)</td>
+    </tr>
+</table>
+<p>Или:</p>
+<table class="unformatted">
+    <tr>
+        <td colspan="4">В любом порядке</td>
+    </tr>
+    <tr>
+        <td colspan="2">В данном порядке</td>
+        <td colspan="2"> </td>
+    </tr>
+    <tr>
+        <td>Фамилия студента</td>
+        <td>Имя Отчество студента</td>
+        <td>Код группы (в формате: Лд-17г/д)</td>
+        <td>Дата рождения (формат данных - дата)</td>
+    </tr>
+</table>
 {% endblock %}

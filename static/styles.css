@@ -1,6 +1,17 @@
 body {
     margin: 0;
 }
+table.unformatted {
+    width: max-content;
+    border-collapse: separate;
+}
+table.unformatted tr {
+    background-color: #dbdbdb !important;
+}
+table.unformatted tr:hover {
+    filter: none;
+    cursor: initial;
+}
 #page-container {
     position: relative;
     min-height: 100vh;

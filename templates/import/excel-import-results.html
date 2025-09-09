@@ -31,9 +31,9 @@
         </thead>
         <tbody>
             {% for row in result.itertuples() %}
-                <tr role="row" tabindex="0" aria-labelledby="row{{row[0]}}">
+                <tr role="row" tabindex="0">
                     <td style="width:5%;text-align:center">
-                        <input type="checkbox" name="selected_records" value="{{row.Index}}" class="record-checkbox" aria-labelledby="row{{row[0]}}" checked>
+                        <input type="checkbox" name="selected_records" value="{{row.Index}}" class="record-checkbox" checked>
                     </td>
                     {% for v in row[1:] %}
                     <td>{{v}}</td>
