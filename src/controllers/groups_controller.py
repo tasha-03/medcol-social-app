@@ -38,12 +38,13 @@ def group_new(code, name, curatorId):
     with sqlite3.connect(SQLITE_DB_PATH) as groups:
         cursor = groups.cursor()
         cursor.execute(
-            "INSERT INTO [Groups] (code,name,curatorId) VALUES (?,?,?) RETURNING id",
+            "INSERT INTO [Groups] (code,name,curatorId) VALUES (?,?,?)",
             (code, name, curatorId)
         )
-        row = cursor.fetchone()
+        rowId = cursor.lastrowid
+
         groups.commit()
-        return row[0] if row else None
+        return rowId
 
 def group_edit(id, code, name, curatorId):
     with sqlite3.connect(SQLITE_DB_PATH) as groups:

@@ -52,7 +52,10 @@ def import_excel_data(
                 col_name = selected_df.columns[columns_dict[col][0]]
                 final_df[col] = selected_df[col_name]
 
-    final_df["birthdate"] = pd.to_datetime(final_df["birthdate"], unit="ms", utc=True)
+    final_df["birthdate"] = pd.to_datetime(
+        final_df["birthdate"],
+        # unit="ms",
+        utc=True, format="%d.%m.%Y")
     final_df["birthdate"] = final_df["birthdate"] + timedelta(hours=3)
     final_df["birthdate"] = final_df["birthdate"].dt.strftime("%Y-%m-%d")
 
@@ -63,19 +66,19 @@ def import_excel_data(
     for i in range(len(groups_list)):
         groups_list[i] = groups_list[i].capitalize()
 
-    print(groups_list)
 
     for group in groups_list:
         try:
             ind = groups_controller.group_new(code=group, name="", curatorId=current_user.id)
         except sqlite3.IntegrityError:
             ind = groups_controller.group_get_by_code(group)[0]
-        final_df.loc[final_df["groupId"] == group, "groupId"] = ind
 
-    print(final_df)
-    for _, record in final_df.iterrows():
-        student_controller.student_new(
-            fio=record["fio"],
-            group_id=record["groupId"],
-            birthdate=record["birthdate"]
-        )
+        found = final_df.loc[final_df["groupId"].apply(lambda g: g.capitalize()) == group]
+        final_df.replace(group, ind, inplace=True)
+
+        for _, record in found.iterrows():
+            student_controller.student_new(
+                fio=record["fio"],
+                group_id=ind,
+                birthdate=record["birthdate"]
+            )
